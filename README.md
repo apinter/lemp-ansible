@@ -1,17 +1,7 @@
 LEMP-stack Role
 =========
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Ansible 1.6<
-
-Role Variables
---------------
-
-N/A
+An Ansible role for deploying LEMP stack.
 
 Dependencies
 ------------
