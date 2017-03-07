@@ -1,4 +1,4 @@
-Role Name
+LEMP-stack Role
 =========
 
 A brief description of the role goes here.
