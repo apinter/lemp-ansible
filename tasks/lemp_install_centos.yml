@@ -1,0 +1,81 @@
+---
+      - name: Enable EPEL repo
+        yum:
+          name: "epel-release"
+          state: latest
+
+      - name: Install LEMP stack
+        yum: name="{{ item }}" state=latest
+        with_items:
+          - nginx
+          - mariadb-server
+          - mariadb
+          - php
+          - php-mysql
+          - php-fpm
+          - MySQL-python
+          - libsemanage-python
+          - net-tools
+
+      - name: Configure NGINX for using PHP
+        copy:
+          src: nginx.conf
+          dest: /etc/nginx/
+          owner: root
+          group: root
+          backup: yes
+
+      - name: Configure NGINX for using PHP
+        copy:
+          src: php.ini
+          dest: /etc/
+          owner: root
+          group: root
+          backup: yes
+
+      - name: Configure NGINX for using PHP
+        copy:
+          src: www.conf
+          dest: /etc/php-fpm.d/
+          owner: root
+          group: root
+          backup: yes
+
+      - name: Enable HTTP/HTTPS on firewalld
+        firewalld:
+          port: 80/tcp
+          permanent: true
+          state: enabled
+          immediate: yes
+
+      - name: Enable HTTP/HTTPS on firewalld
+        firewalld:
+          port: 443/tcp
+          permanent: true
+          state: enabled
+          immediate: yes
+
+      - name: Enable MySQL on firewalld
+        firewalld:
+         service: mysql
+         permanent: true
+         state: enabled
+         immediate: yes
+
+      - name: Enable NGINX in systemd
+        systemd:
+          name: nginx
+          state: started
+          enabled: True
+
+      - name: Enable php-fpm in systemd
+        systemd:
+          name: php-fpm
+          state: started
+          enabled: True
+
+      - name: Enable mariadb in systemd
+        systemd:
+          name: mariadb
+          state: started
+          enabled: True

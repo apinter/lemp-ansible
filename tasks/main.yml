@@ -1,0 +1,5 @@
+---
+# tasks file for LEMP
+  - include: system_update.yml
+  - include: lemp_install_centos.yml
+  - include: mysql_secure_install.yml
